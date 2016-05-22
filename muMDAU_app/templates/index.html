@@ -1,0 +1,42 @@
+{% extends "2row-base.html" %} 
+
+{% block naviIndexClass %}active{% endblock %}
+
+{% block header %}
+<style>
+    .circle-chart { margin:0px auto; width: 100px; position: relative; text-align:center; }
+	.circle-chart__text { font-size:20px; position: absolute; width: 100%; height: 100%; text-align: center; left: 0; top: 10px; line-height: 4; font-family: sans-serif; }
+</style>
+<link rel="stylesheet" href="static/circle/css/circle.css">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+{% endblock %}
+
+{% block title %}建築危樓{% endblock %}
+<!--
+{% block sideFrame %}
+		<a class="active item">效能監控</a>
+		<a class="item">流量監控</a>
+{% endblock %}
+-->
+{% block mainFrame %}
+  <div class="ui grey segment" id="seg01">
+	  	  <a class="ui left black ribbon label">
+		  Maps
+	  	  </a>
+			  <div id="demoMap" style="height:450px"></div>
+	<div class="ui divider"></div>
+
+	</div>
+	<script src="/static/OpenLayers.js"></script>
+	<script>
+    map = new OpenLayers.Map("demoMap");
+	var mapnik         = new OpenLayers.Layer.OSM();
+	var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+	var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+	var position       = new OpenLayers.LonLat(128.58,23.58).transform( fromProjection, toProjection);
+	var zoom           = 8; 
+	map.addLayer(mapnik);
+	map.setCenter(position, zoom );
+	</script>
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "2row-base.html" %} 
+
+{% block naviDockerClass %}active{% endblock %}
+
+{% block header %}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+{% endblock %}
+
+{% block title %}User - Gensokyo Server Platform{% endblock %}
+<!--
+{% block sideFrame %}
+		<a class="active item">容器管理</a>
+		<a class="item">容器模板</a>
+{% endblock %}
+-->
+{% block mainFrame %}
+  <div class="ui grey segment">
+	<div class="ui breadcrumb">
+		  <div class="section">Hakurei</div>
+		    <div class="divider"> / </div>
+		  <div class="section">權限</div>
+		    <div class="divider"> / </div>
+			<div class="active section">使用者</div>
+	</div>
+	<div class="ui divider"></div>
+		  <div class="sixteen wide  aligned column">
+	  	  <a class="ui left black ribbon label">
+		  新增使用者
+	  	  </a>
+		  <div class="ui middle aligned very relaxed stackable grid" style="padding: 12px 0px 0px 0px">
+				  {% include "images.html" %}
+				  {% include "containers.html" %}
+			  <div class="sixteen wide column" style="">
+			  <div class="ui message">
+						    <button class="ui dimage fluid big green button">新增使用者並產生專屬容器</button>
+							<div class="ui divider"></div>
+				  <div class = "header">
+					  關於使用者新增
+				  </div>
+				  <ul class="list">
+					  <li>每個使用者就是一個容器，其有容器的最高管理權限 </li>
+				  </ul>
+			  </div>
+			  </div>
+		  </div>
+		  </div>
+		  <div class ="ui divider"></div>
+	  	  <a class="ui left black ribbon label">
+		  使用者一覽
+	  	  </a>
+		  <table class="ui compact celled definition table">
+			  <thead>
+				      <tr>
+						  <th></th>
+						  <th>使用者名稱</th>
+						  <th>對應容器ID</th>
+						  <th>Ports (C:H)</th>
+						  <th>運作狀況</th>
+					  </tr>
+			  </thead>
+			  <tbody>
+				{% for x in c %}
+				{% if x.get('Status')[0:4] == "Exit"%}
+				  <tr class="error">
+				{% elif x.get('Status')[0:4] == "Crea"%}
+				  <tr class="warning">
+				{% else %}
+				  <tr class="positive">
+  			    {% endif %}
+					  <td class="collapsing">
+						  <div class="ui fitted checkbox">
+							  <input type="checkbox"> <label></label>
+						  </div>
+					  </td>
+					  </td>
+					  <td>{{x.get('Names')[0].replace('/','')}}</td>
+					  <td>{{x.get('Id')[0:12]}}</td>
+					  <td>
+						  {% if x.get('Ports')== [] %}
+						  None
+						  {% else %}
+					      {% for w in x.get('Ports')%}
+						  {{w.get('PrivatePort')}} :
+						  {{w.get('PublicPort')}}
+						  <br />
+						  {% endfor %}
+						  {% endif %}
+					  </td>
+					  <td>{{x.get('Status')}}</td>
+				  </tr>
+				  {% endfor %}
+				 </tbody>
+				 <tfoot class="full-width">
+				  <tr >
+							      <th colspan="9" style="padding:5px;">
+									<div class="ui right floated tiny red icon button">
+										          <i class="remove icon"></i>
+									</div>
+									</th>
+									</tr>
+									</tfoot>
+			  </table>
+</div>
+<script>
+
+$(document).ready(function(){
+$('.coupled.modal')
+	  .modal({
+		      allowMultiple: false
+	  })
+;
+$('.dimage.modal')
+	.modal({
+		blurring: true
+	})
+	.modal('attach events', '.dimage.button', 'show')
+;
+	$('.dset.modal')
+		  .modal('attach events', '.dimage.modal .next.button')
+		  ;
+})
+;
+</script>
+{% endblock %}
