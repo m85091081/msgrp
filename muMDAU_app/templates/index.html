@@ -25,7 +25,50 @@
 	  	  </a>
 			  <div id="demoMap" style="height:450px"></div>
 	<div class="ui divider"></div>
-
+<table class="ui celled striped table">
+  <thead>
+    <tr><th colspan="3">
+      Git Repository
+    </th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td class="collapsing">
+        <i class="folder icon"></i> node_modules
+      </td>
+      <td>Initial commit</td>
+      <td class="right aligned collapsing">10 hours ago</td>
+    </tr>
+    <tr>
+      <td>
+        <i class="folder icon"></i> test
+      </td>
+      <td>Initial commit</td>
+      <td class="right aligned">10 hours ago</td>
+    </tr>
+    <tr>
+      <td>
+        <i class="folder icon"></i> build
+      </td>
+      <td>Initial commit</td>
+      <td class="right aligned">10 hours ago</td>
+    </tr>
+    <tr>
+      <td>
+        <i class="file outline icon"></i> package.json
+      </td>
+      <td>Initial commit</td>
+      <td class="right aligned">10 hours ago</td>
+    </tr>
+    <tr>
+      <td>
+        <i class="file outline icon"></i> Gruntfile.js
+      </td>
+      <td>Initial commit</td>
+      <td class="right aligned">10 hours ago</td>
+    </tr>
+  </tbody>
+</table>
 	</div>
 	<script src="/static/OpenLayers.js"></script>
 	<script>
@@ -33,8 +76,10 @@
 	var mapnik         = new OpenLayers.Layer.OSM();
 	var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
 	var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
-	var position       = new OpenLayers.LonLat(128.58,23.58).transform( fromProjection, toProjection);
-	var zoom           = 8; 
+	var position       = new OpenLayers.LonLat(121.58,23.78).transform( fromProjection, toProjection);
+	
+
+	var zoom           = 7; 
 	map.addLayer(mapnik);
 	map.setCenter(position, zoom );
 	</script>
